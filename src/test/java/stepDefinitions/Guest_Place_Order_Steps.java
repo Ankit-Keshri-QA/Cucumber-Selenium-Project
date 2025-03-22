@@ -1,5 +1,6 @@
 package stepDefinitions;
 
+import factory.DriverFactory;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -24,13 +25,7 @@ public class Guest_Place_Order_Steps {
 
     @Given("I am a Guest User")
     public void iAmAGuestUser() {
-        WebDriverManager.chromedriver().setup();
-        driver = new ChromeDriver();
-
-        driver.manage().window().maximize();
-        driver.manage().deleteAllCookies();
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
-
+        driver = DriverFactory.getDriver();
     }
 
     @And("I have added a product from the cart")

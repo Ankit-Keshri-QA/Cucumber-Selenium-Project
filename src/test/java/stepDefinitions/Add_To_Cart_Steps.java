@@ -1,5 +1,6 @@
 package stepDefinitions;
 
+import factory.DriverFactory;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -18,13 +19,8 @@ public class Add_To_Cart_Steps {
 
     @Given("I am on the Store Page")
     public void iAmOnTheStorePage() {
-        WebDriverManager.chromedriver().setup();
-        driver = new ChromeDriver();
-
-        driver.manage().window().maximize();
-        driver.manage().deleteAllCookies();
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
-
+        driver = DriverFactory.getDriver();
+        System.out.println("Driver: " + driver);
         driver.get("https://askomdch.com/store");
 
     }
