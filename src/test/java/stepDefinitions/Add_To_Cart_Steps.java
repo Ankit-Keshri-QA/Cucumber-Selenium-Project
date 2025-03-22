@@ -31,7 +31,7 @@ public class Add_To_Cart_Steps {
 
     @When("I add a {string} to the Cart")
     public void iAddAToTheCart(String productName) {
-        driver.findElement(By.xpath("//a[@aria-label='Add “"+productName+"” to your cart']")).click();
+        driver.findElement(By.xpath("//a[@aria-label='Add “" + productName + "” to your cart']")).click();
         driver.findElement(By.cssSelector("a[title='View cart']")).click();
     }
 

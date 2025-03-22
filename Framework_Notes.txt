@@ -1,0 +1,179 @@
+Welcome back.
+
+So let us have a look at what exactly we are building.
+
+So this is the framework architecture and it has got multiple components.
+
+And do not get overwhelmed with this architecture.
+
+It is not that complex.
+
+It does have multiple components that are going to work together to help us build a robust production
+
+ready test automation framework, which will be maintainable, readable and scalable.
+
+So we are going to use Cucumber along with selenium and rest assured.
+
+So we will have the feature files that will have the gherkins, the executable specifications.
+
+The glue code will be in the step definitions.
+
+The hooks will be used to initialize the Webdriver object.
+
+So we will have before hook to initialize the Webdriver and after hook to quit the driver.
+
+The Webdriver will be supplied by the factory.
+
+The driver factory.
+
+The Webdriver will be sent to the page objects.
+
+So we are going to have a page object model design in our framework.
+
+So each page object is going to represent a page or a component in the application.
+
+The driver object will be sent to a base page, and this is where we are going to implement the weight
+
+strategy and we are going to initialize the page factory elements.
+
+The page objects will be the subclasses of the base page.
+
+So on the cucumber side, we will create domain objects, for example, product, customer address and
+
+so on.
+
+And we are going to use custom types to directly convert the gherkin data to the domain objects.
+
+On the rest assured side, we are going to have reusable, rest assured methods to make the API calls.
+
+It can be the get method and the post method and then we are going to automate the application APIs
+
+which will be triggered using the reusable rest assured methods.
+
+The application APIs will also be providing the cookies that we can inject in the browser and the same
+
+cookies can be used to make the subsequent API call.
+
+So for a particular scenario, these steps will be in different step definition classes.
+
+So we need to share the objects among these steps, right?
+
+So we need to share the webdriver object, the domain objects and the cookies.
+
+So for these objects we are going to create a test context and we may also add page objects in the test
+
+context.
+
+And then we are going to use the dependency injection framework that will help us inject these objects
+
+into our steps.
+
+So we are going to use the Picco container library for this task and it is a very good library for dependency
+
+injection.
+
+On this side, we will have some common utilities and the common files.
+
+For example, we will have config properties.
+
+For example, we will have some cucumber related settings in the cucumber properties.
+
+Then we will have environment related information in environment dot properties file.
+
+The test data, we will put that in the Json file and among the utilities we are going to use faker
+
+API to create the fake data.
+
+We are going to use Jaxson to parse the Json.
+
+For cookies.
+
+We are going to have cookie utilities to convert the rest assured cookies to selenium cookies, and
+
+then we are going to have properties utility to read the config properties file.
+
+We are also going to have a few classes that will hold the constants.
+
+So with this, we will not have hard coding in the code.
+
+So on the runner side we are going to use JUnit to execute the scenarios, but we will also have a look
+
+at testing and the cucumber runner in case there are differences, for example, parallel execution.
+
+So our framework will support all the three runners on the side.
+
+Our framework will be supporting Maven, the project will be Maven based and we will be using the Maven
+
+command to execute the scenarios.
+
+This same Maven command can be used in the Jenkins job for executing the automation, so we are going
+
+to integrate our automation with GitHub as well as with Jenkins and we are going to execute it through
+
+Jenkins as part of the CI process.
+
+So this way we can accomplish the end to end execution.
+
+On the reporting side, we are going to use the cucumber reports and probably we will also have a look
+
+at the serenity reports for cucumber.
+
+So these are the features that we are looking at for our automation framework.
+
+We are going to follow the Gherkin good practices.
+
+We are going to use Cucumber efficiently to support BDD.
+
+We are not going to use it as the test automation framework, right.
+
+So we are going to use domain objects.
+
+We are going to follow good programming and automation practices.
+
+So on the programming side, we are going to follow the single responsibility principle and they do
+
+not repeat yourself principle on the automation side.
+
+We are going to make sure that our scenarios are independent.
+
+We are not sharing the driver instance.
+
+We are not sharing the test data and we are creating the application state using the APIs and not using
+
+the UI.
+
+So the framework is going to support multiple runners.
+
+The JUnit test and CLI and it is going to support parallel execution using JUnit test and CLI.
+
+So I am going to demonstrate all of this in the course.
+
+Do not worry about that.
+
+We are going to use the dependency injection framework.
+
+So we are going to eliminate the use of threadlocal, the static keyword and we are going to use the
+
+dependency injection to inject our shared objects into our steps.
+
+We are going to integrate the APIs to set up the application state.
+
+So this is another important selenium guideline that we are going to follow.
+
+We are going to capture screenshot on scenario failure.
+
+Then the automation is going to support the command line execution using Maven for seamless integration
+
+with the process and the automation will support the CI CD integration and we are going to integrate
+
+it with GitHub and then with Jenkins and execute it as part of the process.
+
+So in Jenkins there are different ways to trigger the automation.
+
+We are going to have a look at the build frequency, the polling as well as the GitHub web hooks, which
+
+is the preferred option.
+
+So stay tuned and concentrate.
+
+Follow me so that you will understand all the concepts that I am going to explain in the framework.

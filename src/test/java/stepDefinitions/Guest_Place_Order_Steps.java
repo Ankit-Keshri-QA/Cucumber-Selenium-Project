@@ -63,9 +63,8 @@ public class Guest_Place_Order_Steps {
     public void iPlaceTheOrder() {
 
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-        WebElement element = wait.until(ExpectedConditions.refreshed(
-                ExpectedConditions.elementToBeClickable(By.xpath("//button[@id='place_order']")))
-        );
+        WebElement element = wait.until(
+                ExpectedConditions.elementToBeClickable(By.xpath("//button[@id='place_order']")));
         element.click();
 
     }
