@@ -12,7 +12,6 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
 import pageObjects.CartPage;
 import pageObjects.StorePage;
-
 import java.time.Duration;
 
 public class Add_To_Cart_Steps {
