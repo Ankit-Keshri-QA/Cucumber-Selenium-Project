@@ -14,6 +14,9 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
+import pageObjects.CartPage;
+import pageObjects.CheckoutPage;
+import pageObjects.StorePage;
 
 import java.time.Duration;
 import java.util.List;
@@ -26,48 +29,43 @@ public class Guest_Place_Order_Steps {
     @Given("I am a Guest User")
     public void iAmAGuestUser() {
         driver = DriverFactory.getDriver();
+        StorePage storePage = new StorePage(driver);
+        storePage.loadUrl("https://askomdch.com/store");
     }
 
     @And("I have added a product from the cart")
     public void iHaveAddedAProductFromTheCart() {
-        driver.get("https://askomdch.com/store");
-        driver.findElement(By.xpath("//a[@aria-label='Add “Blue Tshirt” to your cart']")).click();
-        driver.findElement(By.cssSelector("a[title='View cart']")).click();
+        StorePage storePage = new StorePage(driver);
+        storePage.addToCart("Blue Shoes");
     }
 
     @And("I am on the Checkout page")
     public void iAmOnTheCheckoutPage() {
-        driver.findElement(By.cssSelector("a[class*='checkout']")).click();
+        CartPage cartPage = new CartPage(driver);
+        cartPage.navigateToCheckoutPage();
     }
 
     @When("I provide the shipping details")
     public void iProvideTheShippingDetails(List<Map<String, String>> billingDetails) {
-        driver.findElement(By.id("billing_first_name")).sendKeys(billingDetails.get(0).get("firstName"));
-        driver.findElement(By.id("billing_last_name")).sendKeys(billingDetails.get(0).get("lastName"));
-        driver.findElement(By.id("billing_address_1")).sendKeys(billingDetails.get(0).get("address_line1"));
-        driver.findElement(By.id("billing_city")).sendKeys(billingDetails.get(0).get("city"));
-        Select select = new Select(driver.findElement(By.id("billing_state")));
-        select.selectByVisibleText(billingDetails.get(0).get("state"));
-        driver.findElement(By.id("billing_postcode")).sendKeys(billingDetails.get(0).get("zipCode"));
-        driver.findElement(By.id("billing_email")).sendKeys(billingDetails.get(0).get("emailID"));
+        CheckoutPage checkOutPage = new CheckoutPage(driver);
+        // checkOutPage.enterBillingFirstName(billingDetails.get(0).get("firstName"));
 
-
+        checkOutPage.setBillingDetails(billingDetails.get(0).get("firstName"),
+                billingDetails.get(0).get("lastName"),
+                billingDetails.get(0).get("address_line1"),
+                billingDetails.get(0).get("city"),
+                billingDetails.get(0).get("state"),
+                billingDetails.get(0).get("zipCode"),
+                billingDetails.get(0).get("emailID"));
     }
 
     @And("I place the order")
     public void iPlaceTheOrder() {
-
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-        WebElement element = wait.until(
-                ExpectedConditions.elementToBeClickable(By.xpath("//button[@id='place_order']")));
-        element.click();
-
+        new CheckoutPage(driver).placeOrder();
     }
 
     @Then("the order should be placed successfully")
     public void theOrderShouldBePlacedSuccessfully() {
-        String successText = driver.findElement(By.cssSelector(".woocommerce-notice")).getText();
-
-        Assert.assertEquals(successText, "Thank you. Your order has been received.");
+        Assert.assertEquals(new CheckoutPage(driver).getNotice(),"Thank you. Your order has been received.");
     }
 }
