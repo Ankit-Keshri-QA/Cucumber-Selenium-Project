@@ -1,5 +1,6 @@
 package stepDefinitions;
 
+import domainObjects.Product;
 import factory.DriverFactory;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -25,18 +26,18 @@ public class Add_To_Cart_Steps {
         storePage.loadUrl("https://askomdch.com/store");
     }
 
-    @When("I add a {string} to the Cart")
-    public void iAddAToTheCart(String productName) {
+    @When("I add a {product} to the Cart")
+    public void iAddAToTheCart(Product product) {
         StorePage storePage = new StorePage(driver);
-        storePage.addToCart(productName);
+        storePage.addToCart(product.getName());
     }
 
 
-    @Then("I should see {int} {string} in the cart")
-    public void iShouldSeeInTheCart(int quantity, String productName) {
+    @Then("I should see {int} {product} in the cart")
+    public void iShouldSeeInTheCart(int quantity,Product product) {
         CartPage cartPage = new CartPage(driver);
         // Assert the product name is expected
-        Assert.assertEquals(productName, cartPage.getProductName());
+        Assert.assertEquals(product.getName(), cartPage.getProductName());
         // Assert the product quantity added
         Assert.assertEquals(quantity, cartPage.gerProductQuantity());
 

@@ -1,5 +1,6 @@
 package stepDefinitions;
 
+import domainObjects.BillingDetails;
 import factory.DriverFactory;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
@@ -25,13 +26,7 @@ import java.util.Map;
 public class Guest_Place_Order_Steps {
 
     private WebDriver driver;
-    private String billingFirstName;
-    private String billingLastName;
-    private String billingAddress;
-    private String billingCity;
-    private String billingState;
-    private String billingZipCode;
-    private String billingEmail;
+    private BillingDetails billingDetails;
 
     @Given("I am a Guest User")
     public void iAmAGuestUser() {
@@ -41,14 +36,8 @@ public class Guest_Place_Order_Steps {
     }
 
     @And("I have the below details")
-    public void iHaveTheBelowDetails(List<Map<String, String>> billingDetails) {
-        billingFirstName = billingDetails.get(0).get("firstName");
-        billingLastName = billingDetails.get(0).get("lastName");
-        billingAddress = billingDetails.get(0).get("address_line1");
-        billingCity = billingDetails.get(0).get("city");
-        billingState = billingDetails.get(0).get("state");
-        billingZipCode = billingDetails.get(0).get("zipCode");
-        billingEmail = billingDetails.get(0).get("emailID");
+    public void iHaveTheBelowDetails(BillingDetails billingDetails) {
+        this.billingDetails = billingDetails;
     }
 
     @And("I have added a product from the cart")
@@ -68,8 +57,9 @@ public class Guest_Place_Order_Steps {
         CheckoutPage checkOutPage = new CheckoutPage(driver);
         // checkOutPage.enterBillingFirstName(billingDetails.get(0).get("firstName"));
 
-        checkOutPage.setBillingDetails(billingFirstName, billingLastName, billingAddress, billingCity, billingState, billingZipCode, billingEmail);
+        // checkOutPage.setBillingDetails(billingFirstName, billingLastName, billingAddress, billingCity, billingState, billingZipCode, billingEmail);
 
+        checkOutPage.setBillingDetails(billingDetails);
     }
 
     @And("I place the order")

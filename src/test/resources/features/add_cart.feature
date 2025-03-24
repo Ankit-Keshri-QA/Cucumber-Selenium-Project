@@ -8,3 +8,16 @@ Feature: Add Product To Cart
     When I add a "Blue Shoes" to the Cart
     Then I should see 1 "Blue Shoes" in the cart
 
+    #Scenario Outline to driver CustomParameterType Domain Object - Lecture 112 - DD Testing
+
+  Scenario Outline:
+
+    Given  I am on the Store Page
+    When I add a "<product_name>" to the Cart
+    Then I should see 1 "<product_name>" in the cart
+
+    Examples:
+      | product_name                    |
+      | Blue Shoes                      |
+      | Anchor Bracelet                 |
+      | Black Over-the-shoulder Handbag |

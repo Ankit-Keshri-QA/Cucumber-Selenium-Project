@@ -1,5 +1,6 @@
 package pageObjects;
 
+import domainObjects.BillingDetails;
 import io.cucumber.java.eo.Se;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -111,6 +112,17 @@ public class CheckoutPage extends BasePage {
                 selectState(state).
                 enterBillingZip(zip).
                 enterBillingEmail(email);
+    }
+
+    public CheckoutPage setBillingDetails(BillingDetails billingDetails) {
+
+        return enterBillingFirstName(billingDetails.getBillingFirstName()).
+                enterBillingLastName(billingDetails.getBillingLastName()).
+                enterAddress(billingDetails.getBillingAddress()).
+                enterBillingCity(billingDetails.getBillingCity()).
+                selectState(billingDetails.getBillingState()).
+                enterBillingZip(billingDetails.getBillingZipCode()).
+                enterBillingEmail(billingDetails.getBillingEmail());
     }
 
     public void placeOrder(){
