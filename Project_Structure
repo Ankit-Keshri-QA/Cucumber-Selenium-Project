@@ -1,0 +1,192 @@
+Your project follows a structured Page Object Model (POM) with Cucumber BDD and includes
+ essential automation framework components like hooks, domain objects, custom types, and step definitions.
+
+🏗 How Everything is Connected in the Framework
+A veteran automation tester would explain the project to a novice in the following way:
+
+🔹 1. Feature Files (Cucumber BDD)
+📍 Location: resources/features/
+📌 Purpose: Defines test scenarios in plain English (Gherkin syntax) so that non-technical
+stakeholders can understand the test cases.
+🔗 Connected to: Step Definitions (stepDefinitions/)
+
+📌 Example:
+
+gherkin
+Copy
+Edit
+Scenario: Guest Order Using Default Payment Option
+    Given I am a Guest User
+    And I have the below details
+    | firstName | lastName | country | address_line1 | city | state | zipCode | emailID |
+    | Marshal   | Mathers  | India   | Manjri Khurd  | Pune | Kansas | 75024   | andlf@gmail |
+    And I have added a product from the cart
+    And I am on the Checkout page
+    When I provide the shipping details
+    And I place the order
+    Then the order should be placed successfully
+➡ The step definitions will have corresponding methods that implement this logic.
+
+🔹 2. Step Definitions
+📍 Location: stepDefinitions/
+📌 Purpose: Maps Gherkin steps from feature files to actual Java methods that interact with the application.
+🔗 Connected to: Page Objects (pageObjects/)
+
+📌 Example: (from Guest_Place_Order_Steps.java)
+
+java
+Copy
+Edit
+@Given("I have the below details")
+public void i_have_the_below_details(DataTable table) {
+    List<BillingDetails> billingDetails = table.asList(BillingDetails.class);
+    checkoutPage.enterBillingDetails(billingDetails.get(0));
+}
+➡ Uses Cucumber DataTables to pass structured test data.
+
+🔹 3. Page Objects (POM)
+📍 Location: pageObjects/
+📌 Purpose: Provides a layer of abstraction for interacting with UI elements, ensuring
+ maintainability and reusability.
+🔗 Connected to: Step Definitions (stepDefinitions/), DriverFactory (factory/)
+
+📌 Example: (from CheckoutPage.java)
+
+java
+Copy
+Edit
+public class CheckoutPage {
+    private WebDriver driver;
+
+    @FindBy(id = "billingFirstName")
+    private WebElement firstNameField;
+
+    @FindBy(id = "billingLastName")
+    private WebElement lastNameField;
+
+    public CheckoutPage(WebDriver driver) {
+        this.driver = driver;
+        PageFactory.initElements(driver, this);
+    }
+
+    public void enterBillingDetails(BillingDetails details) {
+        firstNameField.sendKeys(details.getFirstName());
+        lastNameField.sendKeys(details.getLastName());
+    }
+}
+➡ Encapsulates UI actions to improve maintainability.
+
+🔹 4. Domain Objects
+📍 Location: domainObjects/
+📌 Purpose: Represents business data like products, users, orders, etc.
+🔗 Connected to: Step Definitions (stepDefinitions/), Page Objects (pageObjects/)
+
+📌 Example: (from BillingDetails.java)
+
+java
+Copy
+Edit
+public class BillingDetails {
+    private String firstName;
+    private String lastName;
+    private String country;
+    private String address;
+    private String city;
+    private String state;
+    private String zipCode;
+    private String emailID;
+
+    // Constructors, Getters, and Setters
+}
+➡ Used in Cucumber DataTables to pass structured test data.
+
+🔹 5. Hooks
+📍 Location: hooks/
+📌 Purpose: Provides setup and teardown logic for tests (e.g., starting the browser,
+ closing it, taking screenshots on failure).
+🔗 Connected to: Step Definitions (stepDefinitions/), DriverFactory (factory/)
+
+📌 Example: (from MyHooks.java)
+
+java
+Copy
+Edit
+@Before
+public void setUp() {
+    driver = DriverFactory.getDriver();
+}
+
+@After
+public void tearDown() {
+    driver.quit();
+}
+➡ Ensures browser is initialized and closed properly.
+
+🔹 6. Driver Factory
+📍 Location: factory/
+📌 Purpose: Manages WebDriver instances, allowing flexible browser management.
+🔗 Connected to: Hooks (hooks/), Page Objects (pageObjects/)
+
+📌 Example: (from DriverFactory.java)
+
+java
+Copy
+Edit
+public class DriverFactory {
+    private static WebDriver driver;
+
+    public static WebDriver getDriver() {
+        if (driver == null) {
+            driver = new ChromeDriver();
+        }
+        return driver;
+    }
+}
+➡ Ensures singleton instance of WebDriver.
+
+🔹 7. Custom Data Table Type
+📍 Location: customType/
+📌 Purpose: Converts Cucumber DataTable to domain objects like BillingDetails.
+🔗 Connected to: Step Definitions (stepDefinitions/), Domain Objects (domainObjects/)
+
+📌 Example: (from CustomDataTableType.java)
+
+java
+Copy
+Edit
+@DefaultDataTableEntryTransformer
+public BillingDetails transform(Map<String, String> entry) {
+    return new BillingDetails(
+        entry.get("firstName"),
+        entry.get("lastName"),
+        entry.get("country"),
+        entry.get("address_line1"),
+        entry.get("city"),
+        entry.get("state"),
+        entry.get("zipCode"),
+        entry.get("emailID")
+    );
+}
+➡ Fixes the "UndefinedDataTableTypeException" error.
+
+🏗 Putting It All Together (Test Flow)
+✅ Test Execution Flow (from Cucumber Test Execution)
+1️⃣ Cucumber reads the Feature File (guest_order.feature)
+2️⃣ Step Definition methods execute (Guest_Place_Order_Steps.java)
+3️⃣ Step Definitions call Page Object methods (CheckoutPage.java)
+4️⃣ Page Objects interact with Web Elements
+5️⃣ Domain Objects store test data (BillingDetails.java)
+6️⃣ Driver Factory initializes WebDriver (DriverFactory.java)
+7️⃣ Hooks manage setup & teardown (MyHooks.java)
+
+🔥 How a Veteran Automation Tester Would Summarize It to a Novice
+💡 "Think of this framework as a well-organized company:
+
+Feature Files (resources/features) = 📝 Business requirements
+Step Definitions (stepDefinitions/) = 🏗 Middle managers, mapping business language to Java code
+Page Objects (pageObjects/) = 🚀 The workers that interact with the UI
+Domain Objects (domainObjects/) = 📦 Data models used across the framework
+Hooks (hooks/) = ⚙ Setup & cleanup team
+DriverFactory (factory/) = 🚗 Manages browser sessions
+Custom Data Type (customType/) = 🔄 Converts test data into Java objects automatically
+This structure ensures scalability, maintainability, and reusability in automation testing."

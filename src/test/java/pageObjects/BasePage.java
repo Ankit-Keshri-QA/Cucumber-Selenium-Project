@@ -3,12 +3,13 @@ package pageObjects;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import utilities.ConfigLoader;
 
 import java.time.Duration;
 
 public class BasePage {
 
-    protected  WebDriver driver;
+    protected WebDriver driver;
     protected WebDriverWait wait;
 
     public BasePage(WebDriver driver) {
@@ -17,7 +18,8 @@ public class BasePage {
         PageFactory.initElements(driver, this);
     }
 
-    public void loadUrl(String url) {
-        driver.get(url);
+    // Modified code in Section 21 - Added ConfigLoader method to call baseURL
+    public void loadUrl(String endPoint) {
+        driver.get(ConfigLoader.getInstance().getBaseUrl() + endPoint);
     }
 }

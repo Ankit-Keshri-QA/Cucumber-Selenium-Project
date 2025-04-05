@@ -18,6 +18,7 @@ import org.testng.Assert;
 import pageObjects.CartPage;
 import pageObjects.CheckoutPage;
 import pageObjects.StorePage;
+import utilities.ConfigLoader;
 
 import java.time.Duration;
 import java.util.List;
@@ -32,7 +33,8 @@ public class Guest_Place_Order_Steps {
     public void iAmAGuestUser() {
         driver = DriverFactory.getDriver();
         StorePage storePage = new StorePage(driver);
-        storePage.loadUrl("https://askomdch.com/store");
+        // storePage.loadUrl("https://askomdch.com/store"); - Section 21 - config.properties in below line
+        storePage.loadUrl("/store");
     }
 
     @And("I have the below details")

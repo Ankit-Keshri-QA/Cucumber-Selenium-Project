@@ -13,6 +13,8 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
 import pageObjects.CartPage;
 import pageObjects.StorePage;
+import utilities.ConfigLoader;
+
 import java.time.Duration;
 
 public class Add_To_Cart_Steps {
@@ -23,7 +25,8 @@ public class Add_To_Cart_Steps {
     public void iAmOnTheStorePage() {
         driver = DriverFactory.getDriver();
         StorePage storePage = new StorePage(driver);
-        storePage.loadUrl("https://askomdch.com/store");
+        // storePage.loadUrl("https://askomdch.com/store"); - Removed in Section 21 as part of config.prop file
+        storePage.loadUrl("/store");
     }
 
     @When("I add a {product} to the Cart")
@@ -34,7 +37,7 @@ public class Add_To_Cart_Steps {
 
 
     @Then("I should see {int} {product} in the cart")
-    public void iShouldSeeInTheCart(int quantity,Product product) {
+    public void iShouldSeeInTheCart(int quantity, Product product) {
         CartPage cartPage = new CartPage(driver);
         // Assert the product name is expected
         Assert.assertEquals(product.getName(), cartPage.getProductName());
