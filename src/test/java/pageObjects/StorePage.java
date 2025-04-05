@@ -6,6 +6,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
+import java.nio.charset.StandardCharsets;
+
 public class StorePage extends BasePage {
 
     @FindBy(css = "a[title='View cart']")
