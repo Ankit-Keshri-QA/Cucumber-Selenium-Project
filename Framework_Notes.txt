@@ -22,9 +22,9 @@ The hooks will be used to initialize the Webdriver object.
 
 So we will have before hook to initialize the Webdriver and after hook to quit the driver.
 
-The Webdriver will be supplied by the factory.
+The Webdriver will be supplied by the parentCucumber.customType.factory.
 
-The driver factory.
+The driver parentCucumber.customType.factory.
 
 The Webdriver will be sent to the page objects.
 
@@ -34,7 +34,7 @@ So each page object is going to represent a page or a component in the applicati
 
 The driver object will be sent to a base page, and this is where we are going to implement the weight
 
-strategy and we are going to initialize the page factory elements.
+strategy and we are going to initialize the page parentCucumber.customType.factory elements.
 
 The page objects will be the subclasses of the base page.
 

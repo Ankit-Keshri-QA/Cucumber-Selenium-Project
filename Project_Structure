@@ -48,7 +48,7 @@ public void i_have_the_below_details(DataTable table) {
 📍 Location: pageObjects/
 📌 Purpose: Provides a layer of abstraction for interacting with UI elements, ensuring
  maintainability and reusability.
-🔗 Connected to: Step Definitions (stepDefinitions/), DriverFactory (factory/)
+🔗 Connected to: Step Definitions (stepDefinitions/), DriverFactory (parentCucumber.customType.factory/)
 
 📌 Example: (from CheckoutPage.java)
 
@@ -104,7 +104,7 @@ public class BillingDetails {
 📍 Location: hooks/
 📌 Purpose: Provides setup and teardown logic for tests (e.g., starting the browser,
  closing it, taking screenshots on failure).
-🔗 Connected to: Step Definitions (stepDefinitions/), DriverFactory (factory/)
+🔗 Connected to: Step Definitions (stepDefinitions/), DriverFactory (parentCucumber.customType.factory/)
 
 📌 Example: (from MyHooks.java)
 
@@ -123,7 +123,7 @@ public void tearDown() {
 ➡ Ensures browser is initialized and closed properly.
 
 🔹 6. Driver Factory
-📍 Location: factory/
+📍 Location: parentCucumber.customType.factory/
 📌 Purpose: Manages WebDriver instances, allowing flexible browser management.
 🔗 Connected to: Hooks (hooks/), Page Objects (pageObjects/)
 
@@ -187,6 +187,6 @@ Step Definitions (stepDefinitions/) = 🏗 Middle managers, mapping business lan
 Page Objects (pageObjects/) = 🚀 The workers that interact with the UI
 Domain Objects (domainObjects/) = 📦 Data models used across the framework
 Hooks (hooks/) = ⚙ Setup & cleanup team
-DriverFactory (factory/) = 🚗 Manages browser sessions
+DriverFactory (parentCucumber.customType.factory/) = 🚗 Manages browser sessions
 Custom Data Type (customType/) = 🔄 Converts test data into Java objects automatically
 This structure ensures scalability, maintainability, and reusability in automation testing."

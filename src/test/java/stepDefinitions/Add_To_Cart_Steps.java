@@ -6,17 +6,10 @@ import factory.DriverFactory;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import io.github.bonigarcia.wdm.WebDriverManager;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
 import pageObjects.CartPage;
 import pageObjects.StorePage;
-import utilities.ConfigLoader;
-
-import java.time.Duration;
 
 public class Add_To_Cart_Steps {
 

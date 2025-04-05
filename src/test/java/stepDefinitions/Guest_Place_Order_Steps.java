@@ -7,23 +7,11 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import io.github.bonigarcia.wdm.WebDriverManager;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.Select;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import pageObjects.CartPage;
 import pageObjects.CheckoutPage;
 import pageObjects.StorePage;
-import utilities.ConfigLoader;
-
-import java.time.Duration;
-import java.util.List;
-import java.util.Map;
 
 public class Guest_Place_Order_Steps {
 
@@ -34,7 +22,7 @@ public class Guest_Place_Order_Steps {
     public void iAmAGuestUser() {
         driver = DriverFactory.getDriver();
         StorePage storePage = new StorePage(driver);
-        // storePage.loadUrl("https://askomdch.com/store"); - Section 21 - config.properties in below line
+        // storePage.loadUrl("https://askomdch.com/store"); - Section 21 - prod_config.properties in below line
         storePage.loadUrl(EndPoints.STORE.url);
     }
 

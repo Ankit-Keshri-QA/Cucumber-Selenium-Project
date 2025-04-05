@@ -10,7 +10,7 @@ which act as executable specifications. Step definitions provide the necessary g
 
 Page Object Model (POM): The framework utilizes a POM design, where each page object
 corresponds to a page or a component of the application.
- A base page is established to handle wait strategies and initialize page factory elements.
+ A base page is established to handle wait strategies and initialize page parentCucumber.customType.factory elements.
 
 Domain Objects and Custom Types:
  In Cucumber, domain objects (like product and customer addresses) are created,

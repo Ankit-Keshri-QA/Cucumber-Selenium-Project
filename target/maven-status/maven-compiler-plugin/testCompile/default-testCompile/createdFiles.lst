@@ -1,5 +1,6 @@
 hooks\MyHooks.class
 pageObjects\StorePage.class
+constants\Env.class
 pageObjects\CheckoutPage.class
 stepDefinitions\Guest_Place_Order_Steps.class
 utilities\ConfigLoader.class
@@ -11,6 +12,7 @@ stepDefinitions\Add_To_Cart_Steps.class
 domainObjects\BillingDetails.class
 pageObjects\BasePage.class
 runner\TestNGRunnerTest.class
+utilities\ConfigLoader$1.class
 pageObjects\CartPage.class
 runner\JunitRunnerTest.class
 customType\CustomParameterType.class
