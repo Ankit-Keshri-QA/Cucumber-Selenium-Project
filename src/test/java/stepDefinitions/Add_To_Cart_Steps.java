@@ -1,5 +1,6 @@
 package stepDefinitions;
 
+import constants.EndPoints;
 import domainObjects.Product;
 import factory.DriverFactory;
 import io.cucumber.java.en.Given;
@@ -26,7 +27,7 @@ public class Add_To_Cart_Steps {
         driver = DriverFactory.getDriver();
         StorePage storePage = new StorePage(driver);
         // storePage.loadUrl("https://askomdch.com/store"); - Removed in Section 21 as part of config.prop file
-        storePage.loadUrl("/store");
+        storePage.loadUrl(EndPoints.STORE.url);
     }
 
     @When("I add a {product} to the Cart")

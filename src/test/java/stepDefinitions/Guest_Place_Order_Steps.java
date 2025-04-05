@@ -1,5 +1,6 @@
 package stepDefinitions;
 
+import constants.EndPoints;
 import domainObjects.BillingDetails;
 import factory.DriverFactory;
 import io.cucumber.java.en.And;
@@ -34,7 +35,7 @@ public class Guest_Place_Order_Steps {
         driver = DriverFactory.getDriver();
         StorePage storePage = new StorePage(driver);
         // storePage.loadUrl("https://askomdch.com/store"); - Section 21 - config.properties in below line
-        storePage.loadUrl("/store");
+        storePage.loadUrl(EndPoints.STORE.url);
     }
 
     @And("I have the below details")
