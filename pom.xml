@@ -32,11 +32,11 @@
             <artifactId>webdrivermanager</artifactId>
             <version>5.9.2</version>
         </dependency>
-        <dependency>
-            <groupId>io.cucumber</groupId>
-            <artifactId>cucumber-junit</artifactId>
-            <version>7.20.0</version>
-        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>io.cucumber</groupId>-->
+<!--            <artifactId>cucumber-junit</artifactId>-->
+<!--            <version>7.20.0</version>-->
+<!--        </dependency>-->
         <dependency>
             <groupId>io.cucumber</groupId>
             <artifactId>cucumber-testng</artifactId>
@@ -56,12 +56,12 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>3.5.0</version>
-                <configuration>
-                    <parallel>methods</parallel>
-                    <include>JunitRunnerTest.java</include>
-                    <!-- <useUnlimitedThreads>true</useUnlimitedThreads> -->
-                    <threadCount>3</threadCount>
-                </configuration>
+<!--                <configuration>-->
+<!--                    <parallel>methods</parallel>-->
+<!--                    <include>JunitRunnerTest.java</include>-->
+<!--                    &lt;!&ndash; <useUnlimitedThreads>true</useUnlimitedThreads> &ndash;&gt;-->
+<!--                    <threadCount>3</threadCount>-->
+<!--                </configuration>-->
             </plugin>
         </plugins>
     </build>

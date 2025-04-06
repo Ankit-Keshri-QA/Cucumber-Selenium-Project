@@ -11,8 +11,8 @@ constants\EndPoints.class
 stepDefinitions\Add_To_Cart_Steps.class
 domainObjects\BillingDetails.class
 pageObjects\BasePage.class
+runner\TestNGRunnerTest.class
 utilities\ConfigLoader$1.class
 pageObjects\CartPage.class
-runner\JunitRunnerTest.class
 customType\CustomParameterType.class
 factory\DriverFactory.class
