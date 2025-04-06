@@ -10,37 +10,34 @@ import java.time.Duration;
 
 public class DriverFactory {
 
-    private static WebDriver driver;
+    private static ThreadLocal<WebDriver> driver = new ThreadLocal<>();
 
     public static WebDriver initializeDriver(String browser) {
-        switch (browser) {
-            case "chrome":
+        WebDriver driver = switch (browser) {
+            case "chrome" -> {
                 WebDriverManager.chromedriver().setup();
-                driver = new ChromeDriver();
-                break;
-
-            case "firefox":
+                yield new ChromeDriver();
+            }
+            case "firefox" -> {
                 WebDriverManager.firefoxdriver().setup();
-                driver = new FirefoxDriver();
-                break;
-
-            case "edge":
+                yield new FirefoxDriver();
+            }
+            case "edge" -> {
                 WebDriverManager.edgedriver().setup();
-                driver = new EdgeDriver();
-                break;
-
-            default:
-                throw new IllegalStateException("INVALID BROWSER: "+ browser);
-        }
+                yield new EdgeDriver();
+            }
+            default -> throw new IllegalStateException("INVALID BROWSER: " + browser);
+        };
 
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         driver.manage().deleteAllCookies();
+        DriverFactory.driver.set(driver);
 
         return driver;
     }
 
     public static WebDriver getDriver() {
-        return driver;
+        return driver.get();
     }
 }
