@@ -36,7 +36,7 @@ public class Add_To_Cart_Steps {
         // Assert the product name is expected
         Assert.assertEquals(product.getName(), cartPage.getProductName());
         // Assert the product quantity added
-        Assert.assertEquals(quantity, cartPage.gerProductQuantity());
+        Assert.assertEquals(quantity, cartPage.getProductQuantity());
 
     }
 }

@@ -26,7 +26,7 @@ public class CartPage extends BasePage {
         return wait.until(ExpectedConditions.visibilityOf(productName)).getText();
     }
 
-    public int gerProductQuantity() {
+    public int getProductQuantity() {
         return Integer.parseInt(wait.until(ExpectedConditions.visibilityOf(productQty)).getAttribute("value"));
     }
 
