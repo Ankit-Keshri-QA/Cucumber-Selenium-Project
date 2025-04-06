@@ -13,12 +13,16 @@ public class StorePage extends BasePage {
     @FindBy(css = "a[title='View cart']")
     private WebElement viewCartLink;
 
+    @FindBy(tagName = "h1")
+    private WebElement titleText;
+
     public StorePage(WebDriver driver) {
         super(driver);
     }
 
     public void addToCart(String productName) {
         By addToCartBtn = By.xpath("//a[@aria-label='Add “" + productName + "” to your cart']");
+        wait.until(ExpectedConditions.visibilityOf(titleText));
         wait.until(ExpectedConditions.elementToBeClickable(addToCartBtn)).click();
         wait.until(ExpectedConditions.elementToBeClickable(viewCartLink)).click();
     }
