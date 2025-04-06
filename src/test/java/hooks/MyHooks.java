@@ -10,19 +10,20 @@ import org.openqa.selenium.WebDriver;
 public class MyHooks {
 
     private WebDriver driver;
-    private final TestContext context ;
+    private final TestContext context;
 
     public MyHooks(TestContext context) {
         this.context = context;
     }
 
+
     @Before
     public void setup(Scenario scenario) {
-        context.scenarioName = scenario.getName();
-        System.out.println("DI SCENARIO: " + context.scenarioName);
         System.out.println("BEFORE THREAD ID: " + Thread.currentThread().threadId() + " , "
                 + "SCENARIO NAME: " + scenario.getName());
         driver = DriverFactory.initializeDriver(System.getProperty("browser", "chrome"));
+        context.driver = driver;
+
     }
 
     @After

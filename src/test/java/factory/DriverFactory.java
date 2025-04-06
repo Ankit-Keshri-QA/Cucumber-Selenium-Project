@@ -10,7 +10,6 @@ import java.time.Duration;
 
 public class DriverFactory {
 
-    private static final ThreadLocal<WebDriver> driver = new ThreadLocal<>();
 
     public static WebDriver initializeDriver(String browser) {
         WebDriver driver = switch (browser) {
@@ -32,12 +31,9 @@ public class DriverFactory {
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         driver.manage().deleteAllCookies();
-        DriverFactory.driver.set(driver);
 
         return driver;
     }
 
-    public static WebDriver getDriver() {
-        return driver.get();
-    }
+   
 }
