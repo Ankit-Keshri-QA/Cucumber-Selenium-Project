@@ -9,7 +9,6 @@ import org.openqa.selenium.WebDriver;
 import pageObjects.StorePage;
 
 public class CustomerStepDefinition {
-
     private final WebDriver driver;
     private final TestContext context;
 

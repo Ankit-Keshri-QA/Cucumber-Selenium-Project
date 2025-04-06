@@ -10,7 +10,6 @@ import java.time.Duration;
 
 public class DriverFactory {
 
-
     public static WebDriver initializeDriver(String browser) {
         WebDriver driver = switch (browser) {
             case "chrome" -> {
@@ -35,5 +34,4 @@ public class DriverFactory {
         return driver;
     }
 
-   
 }
