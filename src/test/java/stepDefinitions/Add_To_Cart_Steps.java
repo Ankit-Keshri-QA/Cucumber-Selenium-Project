@@ -1,6 +1,7 @@
 package stepDefinitions;
 
 import constants.EndPoints;
+import context.TestContext;
 import domainObjects.Product;
 import factory.DriverFactory;
 import io.cucumber.java.en.Given;
@@ -14,6 +15,11 @@ import pageObjects.StorePage;
 public class Add_To_Cart_Steps {
 
     private WebDriver driver;
+
+
+    public Add_To_Cart_Steps(TestContext context) {
+        System.out.println("STEP DEF DI: SCENARIO NAME :-  " + context.scenarioName);
+    }
 
     @Given("I am on the Store Page")
     public void iAmOnTheStorePage() {

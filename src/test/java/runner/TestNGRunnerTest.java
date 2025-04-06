@@ -5,7 +5,7 @@ import io.cucumber.testng.CucumberOptions;
 import org.testng.annotations.DataProvider;
 
 @CucumberOptions(
-        glue = {"stepDefinitions", "customType", "hooks", "factory"},
+        glue = {"stepDefinitions", "customType", "hooks", "factory","context"},
         features = {"src/test/resources/features"}
 )
 public class TestNGRunnerTest extends AbstractTestNGCucumberTests {
