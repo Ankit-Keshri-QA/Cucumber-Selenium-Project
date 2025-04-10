@@ -1,5 +1,6 @@
 package stepDefinitions;
 
+import constants.EndPoints;
 import context.TestContext;
 import factory.PageFactoryManager;
 import io.cucumber.java.en.And;
@@ -30,6 +31,15 @@ public class CheckoutStepDefinition {
     @Then("the order should be placed successfully")
     public void theOrderShouldBePlacedSuccessfully() {
         Assert.assertEquals(checkOutPage.getNotice(), "Thank you. Your order has been received.");
+    }
+
+    // Just added for Section 25
+
+    @And("I am on the Checkout page")
+    public void iAmOnTheCheckoutPage() {
+//        cartPage.navigateToCheckoutPage();
+        checkOutPage.loadUrl(EndPoints.CHECKOUT.url);
+
     }
 
 }

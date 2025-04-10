@@ -1,5 +1,6 @@
 package stepDefinitions;
 
+import apis.CartApi;
 import constants.EndPoints;
 import context.TestContext;
 import domainObjects.Product;
@@ -11,9 +12,11 @@ import pageObjects.StorePage;
 
 public class StorePageStepDefinition {
     private final StorePage storePage;
+    private final TestContext context;
 
     public StorePageStepDefinition(TestContext context) {
         this.storePage = PageFactoryManager.getStorePage(context.driver);
+        this.context = context;
     }
 
     @Given("I am on the Store Page")
@@ -28,6 +31,13 @@ public class StorePageStepDefinition {
 
     @And("I have added a product from the cart")
     public void iHaveAddedAProductFromTheCart() {
-        storePage.addToCart("Blue Shoes");
+        // storePage.addToCart("Blue Shoes"); - Commented as part of API Integration Testing Section 25
+
+        // Section 25 - REST API Codes
+        CartApi cartApi = new CartApi(context.cookies.getCookies());
+        cartApi.addToCart(1215, 1);
+        context.cookies.setCookies(cartApi.getCookies());
+        context.cookies.injectCookiesToBrowser(context.driver);
+
     }
 }

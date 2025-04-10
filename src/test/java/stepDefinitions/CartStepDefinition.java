@@ -21,8 +21,8 @@ public class CartStepDefinition {
         Assert.assertEquals(quantity, cartPage.getProductQuantity());
     }
 
-    @And("I am on the Checkout page")
-    public void iAmOnTheCheckoutPage() {
-        cartPage.navigateToCheckoutPage();
-    }
+//    @And("I am on the Checkout page")
+//    public void iAmOnTheCheckoutPage() {
+//        cartPage.navigateToCheckoutPage();
+//    }
 }

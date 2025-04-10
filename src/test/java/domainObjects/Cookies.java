@@ -10,12 +10,12 @@ public class Cookies {
 
     private io.restassured.http.Cookies cookies;
 
-    public io.restassured.http.Cookies getCookie() {
+    public io.restassured.http.Cookies getCookies() {
         return cookies;
     }
 
-    public void setCookie(io.restassured.http.Cookies cookie) {
-        this.cookies = cookie;
+    public void setCookies(io.restassured.http.Cookies cookies) {
+        this.cookies = cookies;
     }
 
     public void injectCookiesToBrowser(WebDriver driver) {
