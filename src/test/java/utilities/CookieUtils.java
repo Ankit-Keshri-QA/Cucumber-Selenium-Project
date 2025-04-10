@@ -8,7 +8,7 @@ import java.util.List;
 
 public class CookieUtils {
 
-    public List<Cookie> convertRACookiesToSeCookies(Cookies cookies) {
+    public List<Cookie> convertRestAssuredCookiesToSeleniumCookies(Cookies cookies) {
         List<io.restassured.http.Cookie> restAssuredCookies;
         restAssuredCookies = cookies.asList();
 
